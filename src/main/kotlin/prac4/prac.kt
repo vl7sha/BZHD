@@ -1,7 +1,9 @@
 package prac4
 
 import java.lang.Math.pow
+import kotlin.math.exp
 import kotlin.math.sqrt
+
 
 fun main() {
 
@@ -50,10 +52,52 @@ fun main() {
 
     val Kp = 1 + ((3 - (F1 / F2)) * (Wn / Um))
     val Lprot = Kp * Lctp * Llprot
-    val Cpred = G/Lprot + Cpp
-    val deltaCpred = (Cpred - Cpp)/(PDK - Cpp)
-    val M = (Gp/G) * deltaCpred - Lv/Lprot
+    val Cpred = G / Lprot + Cpp
+    val deltaCpred = (Cpred - Cpp) / (PDK - Cpp)
+    val M = (Gp / G) * deltaCpred - Lv / Lprot
+    val Kn = searchKn(-100.0, 100.0, M, deltaCpred)
 
-    val Kn =
+    val n = 1 - exp(-2.52 * Kn)
 
+    val Lot = Kn * Lprot
+
+    val Gy = n * G
+
+    val Gyd = Gy/Lot
+
+
+
+}
+
+fun searchKn(al: Double, bl: Double, M: Double, deltaCprod: Double): Double {
+
+    var a = al
+    var b = bl
+
+    if (function(a, M, deltaCprod) * function(b, M, deltaCprod) >= 0) {
+        println(
+            "You have not assumed"
+                    + " right a and b"
+        );
+        return 0.0;
+    }
+
+    var c: Double = a
+    while ((b - a) >= 0.1) {
+        // Find middle point
+        c = (a + b) / 2
+
+
+        // Check if middle point is root
+        if (function(c, M, deltaCprod) == 0.0) break
+        else if (function(c, M, deltaCprod) * function(a, M, deltaCprod) < 0) b = c
+        else a = c
+    }
+
+    return c
+}
+
+fun function(x: Double, M: Double, deltaCprod: Double): Double {
+
+    return exp(-2.52 * x) - (x - M) / deltaCprod
 }
