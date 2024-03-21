@@ -66,6 +66,27 @@ fun main() {
     val Gyd = Gy/Lot
 
 
+    println("""
+        
+        A = (a + (0.24 * h)) / 2 = $A
+        A = (b + (0.24 * h)) / 2 = $B
+        hп = h + b/0.24 = $hp
+        L̄прот = 3.1 − 2.1 · (A/a) = $Llprot
+        Uм = 0.03 · Q^1/3 · (hп /b)^0.38 = $Um
+        Lстр = Uм · a · b = $Lctp
+        F1 = 4 · A · B = $F1
+        F2 = 4 · a · b = $F2
+        Kп = 1 + (3 − F 1/F 2) · (Wв /Uм ) = $Kp
+        Lпрот = K · Lстр · L̄прот = $Lprot
+        Cпред = G/Lпрот + Cпр = $Cpred
+        ∆C̄пред = (Cпред − Cпр )/(ПДК − Cпр ) = $deltaCpred
+        M = (Gр /G) · ∆C̄пред − Lв /Lпрот = $M
+        Kn = $Kn
+        η = 1 − exp(−2.52 · Kη ) = $n
+        Lот = Kη · Lпрот = $Lot
+        Gу = η · G = $Gy
+        Cуд = Gу /Lот = $Gyd
+    """.trimIndent())
 
 }
 
